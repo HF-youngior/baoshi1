@@ -20,7 +20,7 @@ bool DatabaseManager::connect()
     db.setPort(3306);  // 数据库主机地址
     db.setDatabaseName("baoshi1");
     db.setUserName("root");
-    db.setPassword("asdfgh0625YYH");
+    db.setPassword("Fyt@3855");
 
 
     if (!db.open()) {
