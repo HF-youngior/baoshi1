@@ -14,11 +14,19 @@ class DatabaseManager : public QObject
 public:
     DatabaseManager();
     bool connect();          // 连接数据库
+    struct User {
+        QString name;
+        QString email;
+        int score;
+    };
     bool saveUserData(const QString &name, const QString &email, int score);  // 保存用户数据
     bool loadUserData(const QString &email, QString &name, int &score);  // 加载用户数据
+    bool getRankingList(QList<User>& rankingList);
 
 private:
     QSqlDatabase db;
+
+
 };
 
 #endif // DATABASEMANAGER_H

@@ -5,6 +5,7 @@ release/gamescreen.o
 release/loginscreen.o
 release/main.o
 release/mainwindow.o
+release/rankinglist.o
 release/shopmanager.o
 release/skillmanager.o
 release/soundmanager.o
@@ -15,3 +16,4 @@ release/moc_gameengine.o
 release/moc_gamescreen.o
 release/moc_loginscreen.o
 release/moc_mainwindow.o
+release/moc_rankinglist.o

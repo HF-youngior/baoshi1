@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "gamescreen.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,7 +15,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+signals:
+    void startGameSignal(); // 添加一个信号
 private:
     Ui::MainWindow *ui;
 

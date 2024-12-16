@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
@@ -26,6 +27,9 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QLabel *scoreLabel;
+    QProgressBar *progressBar;
+    QPushButton *pauseButton;
+    QLabel *timeLabel;
 
     void setupUi(QWidget *GameScreen)
     {
@@ -47,6 +51,16 @@ public:
         scoreLabel = new QLabel(GameScreen);
         scoreLabel->setObjectName("scoreLabel");
         scoreLabel->setGeometry(QRect(200, 190, 111, 61));
+        progressBar = new QProgressBar(GameScreen);
+        progressBar->setObjectName("progressBar");
+        progressBar->setGeometry(QRect(20, 10, 731, 41));
+        progressBar->setValue(24);
+        pauseButton = new QPushButton(GameScreen);
+        pauseButton->setObjectName("pauseButton");
+        pauseButton->setGeometry(QRect(260, 540, 101, 31));
+        timeLabel = new QLabel(GameScreen);
+        timeLabel->setObjectName("timeLabel");
+        timeLabel->setGeometry(QRect(780, 10, 71, 31));
 
         retranslateUi(GameScreen);
 
@@ -59,6 +73,8 @@ public:
         shopButton->setText(QCoreApplication::translate("GameScreen", "\345\225\206\345\272\227", nullptr));
         exitButton->setText(QCoreApplication::translate("GameScreen", "\351\200\200\345\207\272\346\270\270\346\210\217", nullptr));
         scoreLabel->setText(QString());
+        pauseButton->setText(QCoreApplication::translate("GameScreen", "\346\232\202\345\201\234", nullptr));
+        timeLabel->setText(QString());
     } // retranslateUi
 
 };

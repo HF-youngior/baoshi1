@@ -39,8 +39,10 @@ struct qt_meta_tag_ZN10GameScreenE_t {};
 #ifdef QT_MOC_HAS_STRINGDATA
 static constexpr auto qt_meta_stringdata_ZN10GameScreenE = QtMocHelpers::stringData(
     "GameScreen",
-    "on_shopButton_clicked",
+    "startCountdown",
     "",
+    "pauseGame",
+    "on_shopButton_clicked",
     "on_exitButton_clicked",
     "onGemClicked",
     "row",
@@ -56,7 +58,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10GameScreenE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,14 +66,18 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10GameScreenE[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    2,   34,    2, 0x08,    3 /* Private */,
+       1,    0,   44,    2, 0x0a,    1 /* Public */,
+       3,    0,   45,    2, 0x0a,    2 /* Public */,
+       4,    0,   46,    2, 0x08,    3 /* Private */,
+       5,    0,   47,    2, 0x08,    4 /* Private */,
+       6,    2,   48,    2, 0x08,    5 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
 
        0        // eod
 };
@@ -85,6 +91,10 @@ Q_CONSTINIT const QMetaObject GameScreen::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_tag_ZN10GameScreenE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<GameScreen, std::true_type>,
+        // method 'startCountdown'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'pauseGame'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_shopButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_exitButton_clicked'
@@ -102,9 +112,11 @@ void GameScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<GameScreen *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->on_shopButton_clicked(); break;
-        case 1: _t->on_exitButton_clicked(); break;
-        case 2: _t->onGemClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 0: _t->startCountdown(); break;
+        case 1: _t->pauseGame(); break;
+        case 2: _t->on_shopButton_clicked(); break;
+        case 3: _t->on_exitButton_clicked(); break;
+        case 4: _t->onGemClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         default: ;
         }
     }
@@ -129,14 +141,14 @@ int GameScreen::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

@@ -22,6 +22,8 @@ void MainWindow::on_startGameButton_clicked()
 {
     // 初始化GameScreen对象
     gameScreen = new GameScreen("12");
+    emit startGameSignal(); // 发射信号开始游戏
+    gameScreen->startCountdown();  // 调用 startCountdown 开始倒计时
 
     // 打开游戏界面
     gameScreen->show();  // 显示游戏界面

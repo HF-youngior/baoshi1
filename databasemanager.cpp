@@ -6,6 +6,9 @@
  */
 #include "databasemanager.h"
 #include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariantList>
 
 
 DatabaseManager::DatabaseManager() {}
@@ -75,4 +78,29 @@ bool DatabaseManager::loadUserData(const QString &email, QString &name, int &sco
         return true;
     }
     return false;
+}
+
+
+bool DatabaseManager::getRankingList(QList<User>& rankingList)
+{
+    QSqlQuery query;
+    query.prepare("SELECT name, email, score FROM users ORDER BY score DESC");
+
+    if (query.exec()) {
+        while (query.next()) {
+            QString name = query.value(0).toString();
+            QString email = query.value(1).toString();
+            int score = query.value(2).toInt();
+
+            User user;
+            user.name = name;
+            user.email = email;
+            user.score = score;
+            rankingList.append(user);
+        }
+        return true;
+    } else {
+        qDebug() << "Error fetching ranking list: " << query.lastError().text();
+        return false;
+    }
 }

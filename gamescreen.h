@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPoint>
 #include <QPushButton>
+#include <QProgressBar>
 #include <QGridLayout>
 #include <QPixmap>
 #include "GameEngine.h"
@@ -20,7 +21,9 @@ class GameScreen : public QWidget
 public:
     explicit GameScreen(const QString &userEmail, QWidget *parent = nullptr);
     ~GameScreen();
-
+public slots:
+    void startCountdown(); // 添加一个公共槽函数
+    void pauseGame(); // 新增暂停槽函数
 private:
     Ui::GameScreen *ui;
 
@@ -44,6 +47,20 @@ private:
     void updateScore(int newScore);
     QLabel *scoreLabel;  // 声明 QLabel，用于显示分数
     QString userEmail;  // 当前用户的邮箱
+    // 更新进度条
+    void updateProgressBar();
+
+    // 更新时间标签的函数
+    void updateTimeLabel();
+
+    // 新增暂停标志
+    bool isPaused;
+
+    QPushButton *pauseButton; // 暂停按钮
+    QProgressBar *progressBar; // 声明QProgressBar,用于显示倒计时
+    QLabel *timeLabel; // 用于显示剩余时间的 QLabel
+    int timeLeft;  // 剩余时间
+    QTimer *timer;  // 定时器
 
 
 private slots:

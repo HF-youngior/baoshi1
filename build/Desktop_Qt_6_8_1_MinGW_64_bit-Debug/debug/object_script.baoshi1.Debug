@@ -5,6 +5,7 @@ debug/gamescreen.o
 debug/loginscreen.o
 debug/main.o
 debug/mainwindow.o
+debug/rankinglist.o
 debug/shopmanager.o
 debug/skillmanager.o
 debug/soundmanager.o
@@ -15,3 +16,4 @@ debug/moc_gameengine.o
 debug/moc_gamescreen.o
 debug/moc_loginscreen.o
 debug/moc_mainwindow.o
+debug/moc_rankinglist.o

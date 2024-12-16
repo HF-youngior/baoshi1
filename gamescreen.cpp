@@ -8,6 +8,7 @@ GameScreen::GameScreen(const QString &userEmail, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::GameScreen)
     , userEmail(userEmail)  // 保存传入的邮箱
+    , isPaused(false)
 {
     ui->setupUi(this);
 
@@ -42,6 +43,18 @@ GameScreen::GameScreen(const QString &userEmail, QWidget *parent)
 
     connect(ui->shopButton, &QPushButton::clicked, this, &GameScreen::on_shopButton_clicked);
     connect(ui->exitButton, &QPushButton::clicked, this, &GameScreen::on_exitButton_clicked);
+    connect(ui->pauseButton, &QPushButton::clicked, this, &GameScreen::pauseGame); // 暂停按钮
+
+    progressBar = ui->progressBar;
+    progressBar->setTextVisible(false);// 隐藏进度条进度
+    timeLabel = ui->timeLabel;
+    QPalette palette = this->palette();
+    QColor backgroundColor = palette.color(QPalette::Window); // 获取窗口的背景颜色
+    timeLabel->setStyleSheet(QString("background-color: %1;").arg(backgroundColor.name()));// 让QLabel显示背景颜色
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &GameScreen::updateProgressBar);
+    connect(timer, &QTimer::timeout, this, &GameScreen::updateTimeLabel);
+    timeLeft = 30; // 设置倒计时时间为30秒
 }
 
 GameScreen::~GameScreen()
@@ -129,5 +142,57 @@ void GameScreen::onGemClicked(int row, int col)
     } else {
         gameEngine->swapGems(selectedGem.x(), selectedGem.y(), row, col);  // 第二次点击交换宝石
         selectedGem = QPoint();  // 清空选择
+    }
+}
+void GameScreen::pauseGame()
+{
+    isPaused = !isPaused; // 切换暂停状态
+    if (isPaused) {
+        timer->stop(); // 暂停定时器
+        // 禁用宝石按钮的点击事件
+        for (int row = 0; row < 8; ++row) {
+            for (int col = 0; col < 8; ++col) {
+                buttons[row][col]->setEnabled(false);
+            }
+        }
+        ui->pauseButton->setText("Resume"); // 更改按钮文本为 "Resume"
+    } else {
+        timer->start(10); // 恢复定时器
+        // 启用宝石按钮的点击事件
+        for (int row = 0; row < 8; ++row) {
+            for (int col = 0; col < 8; ++col) {
+                buttons[row][col]->setEnabled(true);
+            }
+        }
+        ui->pauseButton->setText("Pause"); // 更改按钮文本为 "Pause"
+    }
+}
+void GameScreen::startCountdown()
+{
+    // 初始化倒计时条
+    progressBar->setRange(0, 3000);  // 设置进度条范围为0到30秒
+    progressBar->setValue(3000);  // 初始化为满
+    updateTimeLabel(); // 更新时间标签
+    timer->start(10);  // 每10毫秒（1秒）触发一次
+}
+void GameScreen::updateProgressBar()
+{
+    if (!isPaused &&progressBar->value() > 0) {
+        int currentValue = progressBar->value() - 1;  // 每10毫秒减少1
+        progressBar->setValue(currentValue);
+        timeLeft = static_cast<int>(progressBar->value() / 100);  // 更新剩余时间
+    } else if (progressBar->value() <= 0){
+        timer->stop();  // 停止定时器
+        // 可以在这里添加游戏结束的逻辑
+    }
+}
+
+void GameScreen::updateTimeLabel()
+{
+    if (!isPaused &&timeLeft > 0) {
+        timeLabel->setText(QString("%1 s").arg(timeLeft));
+    } else if (timeLeft <= 0){
+        timeLabel->setText("Time's up!");
+        // 可以在这里添加游戏结束的逻辑
     }
 }

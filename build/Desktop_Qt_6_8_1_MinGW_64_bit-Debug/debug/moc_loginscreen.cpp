@@ -39,8 +39,9 @@ struct qt_meta_tag_ZN11LoginScreenE_t {};
 #ifdef QT_MOC_HAS_STRINGDATA
 static constexpr auto qt_meta_stringdata_ZN11LoginScreenE = QtMocHelpers::stringData(
     "LoginScreen",
-    "on_login_clicked",
+    "startGameSignal",
     "",
+    "on_login_clicked",
     "on_gameButton_clicked",
     "on_rankinglistButton_clicked"
 );
@@ -54,17 +55,23 @@ Q_CONSTINIT static const uint qt_meta_data_ZN11LoginScreenE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   38,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       3,    0,   39,    2, 0x08,    2 /* Private */,
+       4,    0,   40,    2, 0x08,    3 /* Private */,
+       5,    0,   41,    2, 0x08,    4 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
@@ -83,6 +90,8 @@ Q_CONSTINIT const QMetaObject LoginScreen::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_tag_ZN11LoginScreenE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<LoginScreen, std::true_type>,
+        // method 'startGameSignal'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_login_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_gameButton_clicked'
@@ -98,13 +107,23 @@ void LoginScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     auto *_t = static_cast<LoginScreen *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->on_login_clicked(); break;
-        case 1: _t->on_gameButton_clicked(); break;
-        case 2: _t->on_rankinglistButton_clicked(); break;
+        case 0: _t->startGameSignal(); break;
+        case 1: _t->on_login_clicked(); break;
+        case 2: _t->on_gameButton_clicked(); break;
+        case 3: _t->on_rankinglistButton_clicked(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _q_method_type = void (LoginScreen::*)();
+            if (_q_method_type _q_method = &LoginScreen::startGameSignal; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
+        }
+    }
 }
 
 const QMetaObject *LoginScreen::metaObject() const
@@ -126,15 +145,21 @@ int LoginScreen::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
+}
+
+// SIGNAL 0
+void LoginScreen::startGameSignal()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

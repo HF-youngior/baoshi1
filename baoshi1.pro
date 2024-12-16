@@ -18,6 +18,7 @@ SOURCES += \
     loginscreen.cpp \
     main.cpp \
     mainwindow.cpp \
+    rankinglist.cpp \
     shopmanager.cpp \
     skillmanager.cpp \
     soundmanager.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     gamescreen.h \
     loginscreen.h \
     mainwindow.h \
+    rankinglist.h \
     shopmanager.h \
     skillmanager.h \
     soundmanager.h \
@@ -38,7 +40,8 @@ HEADERS += \
 FORMS += \
     gamescreen.ui \
     loginscreen.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    rankinglist.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
