@@ -1,3 +1,16 @@
+/**
+ * GameEngine(游戏引擎类）：游戏运行的主要逻辑。
+ * startGame()：启动游戏
+ * randomGemType()：随机宝石类型
+ * getGemAt(int row, int col)：获取宝石位置
+ * swapGems(int row1, int col1, int row2, int col2)：交换宝石位置，“检查是否匹配”与“动画显示”不同时进行
+ * matchGems()：匹配宝石并准备消除
+ * checkMatch(int row, int col)：确顶横向与纵向的已匹配的三个及以上的宝石
+ * clearMatchedGems(int row, int col)：清除已匹配的宝石，重复操作直至地图中没有匹配三个及以上宝石
+ * handleGemFalling()：向下掉落宝石填补形成宝石迷阵新地图
+ * updateBoardWithAnimation()：使用动画更新宝石迷阵地图
+ * updateScore(int points)：更新分数并显示
+ */
 #include "GameEngine.h"
 #include "databasemanager.h"  // 引入数据库管理类
 #include <QRandomGenerator>

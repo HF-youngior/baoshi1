@@ -1,3 +1,13 @@
+/**
+ * GameScreen（游戏界面类）：绘制游戏UI界面
+ * initBoard():初始化界面矩阵信息
+ * updateGemImage(QPushButton *button, int row, int col)：设置宝石图像，可以通过切换路径修改图像
+ * updateBoard()：更新界面矩阵信息，如按钮等
+ * on_shopButton_clicked()：单击以打开商店界面
+ * on_exitButton_clicked()：单击以退出游戏
+ * onGemClicked(int row, int col)：点击宝石后进行的操作，即实现游戏逻辑
+ * updateScore(int newScore)：显示分数
+*/
 #include "gamescreen.h"
 #include "ui_gamescreen.h"
 #include <QVBoxLayout>
