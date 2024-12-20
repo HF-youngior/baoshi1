@@ -13,6 +13,15 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QFont>
+#include <QPropertyAnimation>
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
+#include <QPushButton>
+#include <QRandomGenerator>
+#include <algorithm>
+#include <random>
+#include <QMessageBox>
+#include <QTimer>
 
 GameScreen::GameScreen(const QString &userEmail, QWidget *parent)
     : QWidget(parent)
@@ -65,6 +74,7 @@ GameScreen::GameScreen(const QString &userEmail, QWidget *parent)
     connect(timer, &QTimer::timeout, this, &GameScreen::updateProgressBar);
     connect(timer, &QTimer::timeout, this, &GameScreen::updateTimeLabel);
     timeLeft = 30; // 设置倒计时时间为30秒
+
 }
 
 GameScreen::~GameScreen()
@@ -192,11 +202,12 @@ void GameScreen::updateProgressBar()
         progressBar->setValue(currentValue);
         timeLeft = static_cast<int>(progressBar->value() / 100);  // 更新剩余时间
     } else if (progressBar->value() <= 0){
-        timer->stop();  // 停止定时器
-        // 可以在这里添加游戏结束的逻辑
+        timer->stop();
+        timeLabel->setText("Time's up!");
+        int currentScore = gameEngine->getScore(); // 获取当前分数
+        endGame(currentScore); // 调用结束游戏的方法
     }
 }
-
 void GameScreen::updateTimeLabel()
 {
     if (!isPaused &&timeLeft > 0) {
@@ -204,5 +215,150 @@ void GameScreen::updateTimeLabel()
     } else if (timeLeft <= 0){
         timeLabel->setText("Time's up!");
         // 可以在这里添加游戏结束的逻辑
+    }
+}
+void GameScreen::endGame(int score)
+{
+    QMessageBox::StandardButton button = QMessageBox::information(
+        this, "Game Over",
+        "您的分数为：" + QString::number(score) + "\n点击OK返回登录界面，点击关闭将封住方块。",
+        QMessageBox::Ok | QMessageBox::Close,
+        QMessageBox::Ok);
+    if (button == QMessageBox::Ok) {
+        on_gameOverDialogAccepted(); // 用户点击OK
+    } else {
+        on_gameOverDialogRejected(); // 用户点击关闭
+    }
+}
+void GameScreen::on_gameOverDialogAccepted()
+{
+    emit returnToLogin(); // 发出返回登录界面信号
+}
+void GameScreen::on_gameOverDialogRejected()
+{
+    // 禁用宝石按钮的点击事件
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            buttons[row][col]->setEnabled(false);
+        }
+    }
+    emit gameEnded(gameEngine->getScore()); // 发出游戏结束信号
+}
+
+//重置方法，将图上所有方块收集在一起，再按照行和列，一个一个像发牌的动画一样，将宝石送到新的位置，一个一个来送的
+void GameScreen::on_resetButton_clicked()
+{
+    // 停止计时器和进度条，暂停游戏
+    timer->stop();
+    progressBar->setValue(3000);  // 重置进度条
+    timeLeft = 30;  // 重置倒计时时间
+    updateTimeLabel();  // 更新时间标签
+
+    // 创建并行动画组
+    QParallelAnimationGroup *animationGroup = new QParallelAnimationGroup(this);
+
+    // 清空宝石并记录初始位置
+    QVector<QPoint> initialPositions;
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            QPushButton *button = buttons[row][col];
+            initialPositions.append(button->pos());
+
+            // 将宝石移到屏幕中心
+            QPropertyAnimation *moveAnimation = new QPropertyAnimation(button, "pos");
+            moveAnimation->setDuration(500);
+            moveAnimation->setStartValue(button->pos());
+            moveAnimation->setEndValue(QPoint(410, 240));
+
+            animationGroup->addAnimation(moveAnimation);
+        }
+    }
+
+    // 启动动画
+    animationGroup->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // 动画完成后发牌到新位置
+    connect(animationGroup, &QParallelAnimationGroup::finished, this, &GameScreen::redealToGrid);
+}
+void GameScreen::redealToGrid()
+{
+    // 创建一个 QVector 存储所有宝石的按钮
+    QVector<QPushButton*> allButtons;
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            allButtons.append(buttons[row][col]);
+        }
+    }
+
+    // 打乱宝石顺序
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+    std::shuffle(allButtons.begin(), allButtons.end(), rng);
+
+    // 创建顺序动画组，发牌到新的位置
+    QSequentialAnimationGroup *redealGroup = new QSequentialAnimationGroup(this);
+
+    // 更新按钮图像并创建移动动画
+    int idx = 0;
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            QPushButton *button = buttons[row][col];
+            updateGemImage(button, row, col);  // 更新宝石图像
+
+            // 目标位置
+            QPoint targetPos(col * 60 + 10, row * 60 + 10);
+
+            // 动画：将宝石移到新的位置
+            QPropertyAnimation *moveAnimation = new QPropertyAnimation(button, "pos");
+            moveAnimation->setDuration(100);
+            moveAnimation->setStartValue(QPoint(410, 240));  // 从屏幕中心出发
+            moveAnimation->setEndValue(targetPos);  // 到达目标位置
+
+            redealGroup->addAnimation(moveAnimation);
+
+            // 给当前按钮分配新的随机按钮位置
+            QPushButton *randomButton = allButtons[idx++];
+            QPropertyAnimation *moveToNewPos = new QPropertyAnimation(randomButton, "pos");
+            moveToNewPos->setDuration(100);
+            moveToNewPos->setStartValue(QPoint(410, 240));  // 从屏幕中心出发
+            moveToNewPos->setEndValue(targetPos);  // 目标位置
+
+            redealGroup->addAnimation(moveToNewPos);
+        }
+    }
+
+    // 启动重新发牌的动画
+    redealGroup->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // 动画结束后，更新宝石图像和游戏状态
+    connect(redealGroup, &QSequentialAnimationGroup::finished, this, &GameScreen::resetBoard);
+}
+void GameScreen::resetBoard()
+{
+    // 在所有动画完成后，统一更新宝石图像
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            updateGemImage(buttons[row][col], row, col);  // 更新宝石的图像
+        }
+    }
+
+    // 恢复游戏状态
+    gameEngine->startGame();  // 重启游戏引擎
+
+    // 恢复倒计时和进度条
+    progressBar->setValue(3000);  // 重置进度条
+    timeLeft = 30;  // 重置倒计时时间
+    updateTimeLabel();  // 更新时间标签
+    timer->start(10);  // 启动定时器
+
+    // 恢复暂停状态
+    isPaused = false;
+    ui->pauseButton->setText("Pause");  // 恢复按钮文本为 "Pause"
+
+    // 启用宝石按钮的点击事件
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            buttons[row][col]->setEnabled(true);
+        }
     }
 }

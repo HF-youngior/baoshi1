@@ -42,10 +42,10 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>120</y>
-     <width>451</width>
-     <height>401</height>
+     <x>390</x>
+     <y>80</y>
+     <width>461</width>
+     <height>441</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout"/>
@@ -80,7 +80,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>540</y>
+     <y>550</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -100,6 +100,19 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="resetButton">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>390</y>
+     <width>71</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>重置</string>
    </property>
   </widget>
  </widget>

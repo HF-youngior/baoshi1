@@ -20,6 +20,7 @@ public:
     QString getGemAt(int row, int col);
     void updateScore(int points);
     void setScore(int newScore);
+    int getScore(); // 新增方法，用于获取当前分数
 
 signals:
     void updateBoard();

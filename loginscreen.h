@@ -24,6 +24,8 @@ private slots:
     void on_login_clicked();
     void on_gameButton_clicked();
     void on_rankinglistButton_clicked();
+    void on_gameEnded(); // 新增槽函数，处理游戏结束逻辑
+    void on_returnToLogin(); // 新增槽函数，处理返回登录界面逻辑
 
 private:
     Ui::LoginScreen *ui;

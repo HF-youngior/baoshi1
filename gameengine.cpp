@@ -256,15 +256,7 @@ void GameEngine::updateBoardWithAnimation()
         break;
 
     case Step::None:
-        matched = matchGems();
-        if (matched) {
-            // 如果有匹配，执行消除操作并继续下落
-            m_currentStep = Step::Clear;
-        } else {
-            // 处理None的情况，可能是游戏结束或者无操作
-            return;  // 直接返回
-        }
-
+        return;
     }
 
     emit updateBoard();  // 每个步骤后更新UI
@@ -294,4 +286,8 @@ void GameEngine::updateScore(int points)
     } else {
         qDebug() << "无法加载用户数据！";
     }
+}
+int GameEngine::getScore()
+{
+    return score;
 }

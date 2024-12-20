@@ -24,6 +24,10 @@ public:
 public slots:
     void startCountdown(); // 添加一个公共槽函数
     void pauseGame(); // 新增暂停槽函数
+    void endGame(int score); // 新增槽函数，处理游戏结束逻辑
+signals:
+    void gameEnded(int score); // 新增信号，用于通知游戏结束和分数
+    void returnToLogin(); // 新增信号，返回登录界面
 private:
     Ui::GameScreen *ui;
 
@@ -63,6 +67,7 @@ private:
     QTimer *timer;  // 定时器
 
 
+
 private slots:
     // 商店按钮点击
     void on_shopButton_clicked();
@@ -73,6 +78,12 @@ private slots:
     // 宝石点击事件
     void onGemClicked(int row, int col);
 
+    void on_resetButton_clicked();
+    void resetBoard();
+
+    void redealToGrid();
+    void on_gameOverDialogAccepted(); // 新增槽函数，当用户点击OK时调用
+    void on_gameOverDialogRejected(); // 新增槽函数，当用户点击关闭时调用
 };
 
 #endif // GAMESCREEN_H
