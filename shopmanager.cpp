@@ -1,7 +1,7 @@
 /**
- * ShopManager（商店管理类）：处理商店中道具的购买和使用。
- * buyItem()
- * useItem()
+ * ShopManager（商店管理类）：处理商店中道具的购买和使用
+ * buyItem(const QString &itemName)：购买道具
+ * useItem(const QString &itemName)：使用道具
  */
 #include "ShopManager.h"
 #include <QMessageBox>

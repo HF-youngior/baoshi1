@@ -1,3 +1,8 @@
+/**
+ * RankingList（排行榜类）：从数据库获取排行榜
+ * displayRanking()：获取排行并显示
+ * on_back_clicked()：回退至初始页面
+ */
 #include "rankinglist.h"
 #include "ui_rankinglist.h"
 #include "databasemanager.h"

@@ -1,10 +1,8 @@
 /**
- * UserManager（用户管理类）：负责用户的登录、注册、信息存储。
- * login()
- * register()
- * getUserData()
- *
- *
+ * UserManager（用户管理类）：负责用户的登录、注册、信息存储
+ * login(const QString &username, const QString &password)：用户登录
+ * register(const QString &username, const QString &password)：用户注册
+ * getUserData()：获取存储用户数据信息
  */
 #include "UserManager.h"
 #include <QMessageBox>

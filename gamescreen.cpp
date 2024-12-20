@@ -282,23 +282,20 @@ void GameScreen::on_resetButton_clicked()
 }
 void GameScreen::redealToGrid()
 {
-    // 创建一个 QVector 存储所有宝石的按钮
-    QVector<QPushButton*> allButtons;
-    for (int row = 0; row < 8; ++row) {
-        for (int col = 0; col < 8; ++col) {
-            allButtons.append(buttons[row][col]);
-        }
-    }
-
     // 打乱宝石顺序
     std::random_device rd;
     std::default_random_engine rng(rd());
+    std::vector<QPushButton*> allButtons;
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            allButtons.push_back(buttons[row][col]);
+        }
+    }
     std::shuffle(allButtons.begin(), allButtons.end(), rng);
 
     // 创建顺序动画组，发牌到新的位置
     QSequentialAnimationGroup *redealGroup = new QSequentialAnimationGroup(this);
 
-    // 更新按钮图像并创建移动动画
     int idx = 0;
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {
@@ -315,23 +312,12 @@ void GameScreen::redealToGrid()
             moveAnimation->setEndValue(targetPos);  // 到达目标位置
 
             redealGroup->addAnimation(moveAnimation);
-
-            // 给当前按钮分配新的随机按钮位置
-            QPushButton *randomButton = allButtons[idx++];
-            QPropertyAnimation *moveToNewPos = new QPropertyAnimation(randomButton, "pos");
-            moveToNewPos->setDuration(100);
-            moveToNewPos->setStartValue(QPoint(410, 240));  // 从屏幕中心出发
-            moveToNewPos->setEndValue(targetPos);  // 目标位置
-
-            redealGroup->addAnimation(moveToNewPos);
         }
     }
 
     // 启动重新发牌的动画
-    redealGroup->start(QAbstractAnimation::DeleteWhenStopped);
-
-    // 动画结束后，更新宝石图像和游戏状态
     connect(redealGroup, &QSequentialAnimationGroup::finished, this, &GameScreen::resetBoard);
+    redealGroup->start(QAbstractAnimation::DeleteWhenStopped);
 }
 void GameScreen::resetBoard()
 {

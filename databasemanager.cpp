@@ -1,8 +1,9 @@
 /**
- * DatabaseManager（数据库管理类）：处理与数据库的交互。
- * connect()
- * saveUserData()
- * loadUserData()
+ * DatabaseManager（数据库管理类）：处理与数据库的交互
+ * connect()：与本机数据库相连
+ * saveUserData(const QString &name, const QString &email, int score)：保存注册或登录的用户信息
+ * loadUserData(const QString &email, QString &name, int &score)：加载初始的数据库中内容
+ * getRankingList(QList<User>& rankingList)：得到排行榜
  */
 #include "databasemanager.h"
 #include <QSqlDatabase>

@@ -1,3 +1,8 @@
+/**
+ * MainWindow(主函数界面类)
+ * on_startGameButton_clicked()：单击开始游戏按钮后的操作
+ * on_loginButton_clicked()：单击登录或注册后的操作
+ */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gamescreen.h"

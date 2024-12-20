@@ -1,3 +1,9 @@
+/**
+ * LoginScreen（初始页面类）：初始登录或注册用户的界面
+ * on_login_clicked()：单击以输入用户的用户名与邮箱信息
+ * on_gameButton_clicked()：单击可开始游戏
+ * on_rankinglistButton_clicked()：单击以打开排行榜
+ */
 #include "loginscreen.h"
 #include "ui_loginscreen.h"
 #include "gamescreen.h"
