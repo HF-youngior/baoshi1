@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QTableWidgetItem>
 #include <QList>
-#include "databasemanager.h"  // 引入DatabaseManager
 
 namespace Ui {
 class RankingList;

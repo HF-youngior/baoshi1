@@ -70,15 +70,22 @@ bool DatabaseManager::saveUserData(const QString &name, const QString &email, in
 bool DatabaseManager::loadUserData(const QString &email, QString &name, int &score)
 {
     QSqlQuery query;
-    query.prepare("SELECT name, score FROM users WHERE email = :email");
+    query.prepare("SELECT * FROM users WHERE email = :email");
     query.bindValue(":email", email);
 
-    if (query.exec() && query.next()) {
-        name = query.value(0).toString();
-        score = query.value(1).toInt();
-        return true;
+    if (query.exec()) {
+        if (query.next()) {
+            name = query.value("name").toString();
+            score = query.value("score").toInt();
+            return true;  // 查询成功，返回用户数据
+        } else {
+            qDebug() << "No user found with email:" << email;
+            return false;  // 没有找到用户
+        }
+    } else {
+        qDebug() << "Database query failed:" << query.lastError().text();
+        return false;  // 查询执行失败
     }
-    return false;
 }
 
 

@@ -4,5 +4,10 @@
         <file>image/2.bmp</file>
         <file>image/3.bmp</file>
         <file>image/4.bmp</file>
+        <file>image/2.2.jpg</file>
+        <file>image/2.4.jpg</file>
+        <file>image/3.1.jpg</file>
+        <file>image/3.2.jpg</file>
+        <file>image/3.3.jpg</file>
     </qresource>
 </RCC>

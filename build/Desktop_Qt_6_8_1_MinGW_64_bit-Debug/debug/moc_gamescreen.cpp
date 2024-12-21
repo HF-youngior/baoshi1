@@ -43,6 +43,10 @@ static constexpr auto qt_meta_stringdata_ZN10GameScreenE = QtMocHelpers::stringD
     "",
     "score",
     "returnToLogin",
+    "resetPotionPurchased",
+    "count",
+    "freezePotionPurchased",
+    "superPotionPurchased",
     "startCountdown",
     "pauseGame",
     "endGame",
@@ -55,7 +59,10 @@ static constexpr auto qt_meta_stringdata_ZN10GameScreenE = QtMocHelpers::stringD
     "resetBoard",
     "redealToGrid",
     "on_gameOverDialogAccepted",
-    "on_gameOverDialogRejected"
+    "on_gameOverDialogRejected",
+    "on_resetPotionPurchased",
+    "on_freezePotionPurchased",
+    "on_superPotionPurchased"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -67,33 +74,42 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10GameScreenE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   92,    2, 0x06,    1 /* Public */,
-       4,    0,   95,    2, 0x06,    3 /* Public */,
+       1,    1,  128,    2, 0x06,    1 /* Public */,
+       4,    0,  131,    2, 0x06,    3 /* Public */,
+       5,    1,  132,    2, 0x06,    4 /* Public */,
+       7,    1,  135,    2, 0x06,    6 /* Public */,
+       8,    1,  138,    2, 0x06,    8 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       5,    0,   96,    2, 0x0a,    4 /* Public */,
-       6,    0,   97,    2, 0x0a,    5 /* Public */,
-       7,    1,   98,    2, 0x0a,    6 /* Public */,
-       8,    0,  101,    2, 0x08,    8 /* Private */,
-       9,    0,  102,    2, 0x08,    9 /* Private */,
-      10,    2,  103,    2, 0x08,   10 /* Private */,
-      13,    0,  108,    2, 0x08,   13 /* Private */,
-      14,    0,  109,    2, 0x08,   14 /* Private */,
-      15,    0,  110,    2, 0x08,   15 /* Private */,
-      16,    0,  111,    2, 0x08,   16 /* Private */,
-      17,    0,  112,    2, 0x08,   17 /* Private */,
+       9,    0,  141,    2, 0x0a,   10 /* Public */,
+      10,    0,  142,    2, 0x0a,   11 /* Public */,
+      11,    1,  143,    2, 0x0a,   12 /* Public */,
+      12,    0,  146,    2, 0x08,   14 /* Private */,
+      13,    0,  147,    2, 0x08,   15 /* Private */,
+      14,    2,  148,    2, 0x08,   16 /* Private */,
+      17,    0,  153,    2, 0x08,   19 /* Private */,
+      18,    0,  154,    2, 0x08,   20 /* Private */,
+      19,    0,  155,    2, 0x08,   21 /* Private */,
+      20,    0,  156,    2, 0x08,   22 /* Private */,
+      21,    0,  157,    2, 0x08,   23 /* Private */,
+      22,    1,  158,    2, 0x08,   24 /* Private */,
+      23,    1,  161,    2, 0x08,   26 /* Private */,
+      24,    1,  164,    2, 0x08,   28 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
 
  // slots: parameters
     QMetaType::Void,
@@ -101,12 +117,15 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10GameScreenE[] = {
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   11,   12,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   15,   16,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
 
        0        // eod
 };
@@ -125,6 +144,15 @@ Q_CONSTINIT const QMetaObject GameScreen::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'returnToLogin'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetPotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'freezePotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'superPotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'startCountdown'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'pauseGame'
@@ -149,7 +177,16 @@ Q_CONSTINIT const QMetaObject GameScreen::staticMetaObject = { {
         // method 'on_gameOverDialogAccepted'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_gameOverDialogRejected'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_resetPotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_freezePotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_superPotionPurchased'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -161,17 +198,23 @@ void GameScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->gameEnded((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 1: _t->returnToLogin(); break;
-        case 2: _t->startCountdown(); break;
-        case 3: _t->pauseGame(); break;
-        case 4: _t->endGame((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 5: _t->on_shopButton_clicked(); break;
-        case 6: _t->on_exitButton_clicked(); break;
-        case 7: _t->onGemClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 8: _t->on_resetButton_clicked(); break;
-        case 9: _t->resetBoard(); break;
-        case 10: _t->redealToGrid(); break;
-        case 11: _t->on_gameOverDialogAccepted(); break;
-        case 12: _t->on_gameOverDialogRejected(); break;
+        case 2: _t->resetPotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 3: _t->freezePotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 4: _t->superPotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 5: _t->startCountdown(); break;
+        case 6: _t->pauseGame(); break;
+        case 7: _t->endGame((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 8: _t->on_shopButton_clicked(); break;
+        case 9: _t->on_exitButton_clicked(); break;
+        case 10: _t->onGemClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 11: _t->on_resetButton_clicked(); break;
+        case 12: _t->resetBoard(); break;
+        case 13: _t->redealToGrid(); break;
+        case 14: _t->on_gameOverDialogAccepted(); break;
+        case 15: _t->on_gameOverDialogRejected(); break;
+        case 16: _t->on_resetPotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 17: _t->on_freezePotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 18: _t->on_superPotionPurchased((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -188,6 +231,27 @@ void GameScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             using _q_method_type = void (GameScreen::*)();
             if (_q_method_type _q_method = &GameScreen::returnToLogin; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameScreen::*)(int );
+            if (_q_method_type _q_method = &GameScreen::resetPotionPurchased; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 2;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameScreen::*)(int );
+            if (_q_method_type _q_method = &GameScreen::freezePotionPurchased; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 3;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (GameScreen::*)(int );
+            if (_q_method_type _q_method = &GameScreen::superPotionPurchased; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 4;
                 return;
             }
         }
@@ -213,14 +277,14 @@ int GameScreen::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 19;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 19)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 19;
     }
     return _id;
 }
@@ -236,5 +300,26 @@ void GameScreen::gameEnded(int _t1)
 void GameScreen::returnToLogin()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void GameScreen::resetPotionPurchased(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void GameScreen::freezePotionPurchased(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void GameScreen::superPotionPurchased(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_WARNING_POP

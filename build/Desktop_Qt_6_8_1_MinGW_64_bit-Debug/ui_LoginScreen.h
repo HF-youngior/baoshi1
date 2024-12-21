@@ -25,7 +25,6 @@ public:
     QLineEdit *emailLineEdit;
     QPushButton *login;
     QPushButton *gameButton;
-    QPushButton *pushButton_2;
     QPushButton *rankinglistButton;
     QDateTimeEdit *dateTimeEdit;
 
@@ -46,9 +45,6 @@ public:
         gameButton = new QPushButton(LoginScreen);
         gameButton->setObjectName("gameButton");
         gameButton->setGeometry(QRect(630, 400, 91, 41));
-        pushButton_2 = new QPushButton(LoginScreen);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(560, 500, 80, 24));
         rankinglistButton = new QPushButton(LoginScreen);
         rankinglistButton->setObjectName("rankinglistButton");
         rankinglistButton->setGeometry(QRect(740, 500, 80, 24));
@@ -66,7 +62,6 @@ public:
         LoginScreen->setWindowTitle(QCoreApplication::translate("LoginScreen", "Form", nullptr));
         login->setText(QCoreApplication::translate("LoginScreen", "\347\231\273\345\275\225/\346\263\250\345\206\214", nullptr));
         gameButton->setText(QCoreApplication::translate("LoginScreen", "\345\274\200\345\247\213\346\270\270\346\210\217", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("LoginScreen", "\345\225\206\345\272\227", nullptr));
         rankinglistButton->setText(QCoreApplication::translate("LoginScreen", "\346\216\222\350\241\214\346\246\234", nullptr));
     } // retranslateUi
 

@@ -9,6 +9,7 @@ release/rankinglist.o
 release/shopmanager.o
 release/skillmanager.o
 release/soundmanager.o
+release/startscreen.o
 release/usermanager.o
 release/qrc_resource.o
 release/moc_databasemanager.o
@@ -17,3 +18,4 @@ release/moc_gamescreen.o
 release/moc_loginscreen.o
 release/moc_mainwindow.o
 release/moc_rankinglist.o
+release/moc_startscreen.o

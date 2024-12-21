@@ -7,9 +7,9 @@
 #include <QProgressBar>
 #include <QGridLayout>
 #include <QPixmap>
-#include "GameEngine.h"
-#include "ui_gamescreen.h"
+#include "GameEngine.h"  // 保持对 GameEngine.h 的引用
 
+#include "ui_gamescreen.h" // 在最后包含 Ui::GameScreen
 namespace Ui {
 class GameScreen;
 }
@@ -25,9 +25,15 @@ public slots:
     void startCountdown(); // 添加一个公共槽函数
     void pauseGame(); // 新增暂停槽函数
     void endGame(int score); // 新增槽函数，处理游戏结束逻辑
+
 signals:
     void gameEnded(int score); // 新增信号，用于通知游戏结束和分数
     void returnToLogin(); // 新增信号，返回登录界面
+
+    void resetPotionPurchased(int count);  // 信号: 重置药水购买
+    void freezePotionPurchased(int count); // 信号: 冷冻药水购买
+    void superPotionPurchased(int count);  // 信号: 超级药水购买
+
 private:
     Ui::GameScreen *ui;
 
@@ -66,6 +72,11 @@ private:
     int timeLeft;  // 剩余时间
     QTimer *timer;  // 定时器
 
+    int resetPotionCount;        // 重置药水数量
+    int freezePotionCount;       // 冷冻药水数量
+    int superPotionCount;        // 超级药水数量
+    QLabel *skillLabel;          // 显示技能（药水）数量
+    void updateSkillLabel();     // 更新技能标签
 
 
 private slots:
@@ -84,6 +95,10 @@ private slots:
     void redealToGrid();
     void on_gameOverDialogAccepted(); // 新增槽函数，当用户点击OK时调用
     void on_gameOverDialogRejected(); // 新增槽函数，当用户点击关闭时调用
+
+    void on_resetPotionPurchased(int count);  // 接收购买重置药水的信号
+    void on_freezePotionPurchased(int count); // 接收购买冷冻药水的信号
+    void on_superPotionPurchased(int count);  // 接收购买超级药水的信号
 };
 
 #endif // GAMESCREEN_H

@@ -8,8 +8,9 @@
  * onGemClicked(int row, int col)：点击宝石后进行的操作，即实现游戏逻辑
  * updateScore(int newScore)：显示分数
 */
-#include "gamescreen.h"
+
 #include "ui_gamescreen.h"
+#include "gamescreen.h"
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QFont>
@@ -74,6 +75,23 @@ GameScreen::GameScreen(const QString &userEmail, QWidget *parent)
     connect(timer, &QTimer::timeout, this, &GameScreen::updateProgressBar);
     connect(timer, &QTimer::timeout, this, &GameScreen::updateTimeLabel);
     timeLeft = 30; // 设置倒计时时间为30秒
+
+     // 初始化技能标签
+    // 假设 skillLabel 已经在 UI 中定义了，不需要重新创建
+    skillLabel=ui->skillLabel;
+    skillLabel->setText("药水数量: \n重置药水: 0,\n 冷冻药水: 0, \n超级药水: 0");
+    skillLabel->setAlignment(Qt::AlignCenter);
+    skillLabel->setFont(QFont("Arial", 8));
+
+
+    resetPotionCount = 0;
+    freezePotionCount = 0;
+    superPotionCount = 0;
+
+    // 连接信号来更新药水数量
+    connect(this, &GameScreen::resetPotionPurchased, this, &GameScreen::on_resetPotionPurchased);
+    connect(this, &GameScreen::freezePotionPurchased, this, &GameScreen::on_freezePotionPurchased);
+    connect(this, &GameScreen::superPotionPurchased, this, &GameScreen::on_superPotionPurchased);
 
 }
 
@@ -296,7 +314,6 @@ void GameScreen::redealToGrid()
     // 创建顺序动画组，发牌到新的位置
     QSequentialAnimationGroup *redealGroup = new QSequentialAnimationGroup(this);
 
-    int idx = 0;
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {
             QPushButton *button = buttons[row][col];
@@ -347,4 +364,39 @@ void GameScreen::resetBoard()
             buttons[row][col]->setEnabled(true);
         }
     }
+}
+void GameScreen::on_resetPotionPurchased(int count) {
+    // 更新重置药水的数量
+    resetPotionCount += count;
+
+    // 输出重置药水的数量
+    qDebug() << "重置药水数量: " << resetPotionCount;
+
+    updateSkillLabel();  // 更新显示技能数量
+}
+
+void GameScreen::on_freezePotionPurchased(int count) {
+    // 更新冷冻药水的数量
+    freezePotionCount += count;
+
+    // 输出冷冻药水的数量
+    qDebug() << "冷冻药水数量: " << freezePotionCount;
+
+    updateSkillLabel();  // 更新显示技能数量
+}
+
+void GameScreen::on_superPotionPurchased(int count) {
+    // 更新超级药水的数量
+    superPotionCount += count;
+
+    // 输出超级药水的数量
+    qDebug() << "超级药水数量: " << superPotionCount;
+
+    updateSkillLabel();  // 更新显示技能数量
+}
+void GameScreen::updateSkillLabel() {
+    skillLabel->setText(QString("药水数量: \n重置药水: %1, \n冷冻药水: %2, \n超级药水: %3")
+                            .arg(resetPotionCount)
+                            .arg(freezePotionCount)
+                            .arg(superPotionCount));
 }

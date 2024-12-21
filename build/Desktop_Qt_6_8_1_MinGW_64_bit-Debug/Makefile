@@ -419,12 +419,9 @@ Makefile: ../../baoshi1.pro F:/QT/6.8.1/mingw_64/mkspecs/win32-g++/qmake.conf F:
 		F:/QT/6.8.1/mingw_64/mkspecs/features/yacc.prf \
 		F:/QT/6.8.1/mingw_64/mkspecs/features/lex.prf \
 		../../baoshi1.pro \
-		F:/QT/6.8.1/mingw_64/lib/Qt6MultimediaWidgets.prl \
-		F:/QT/6.8.1/mingw_64/lib/Qt6Multimedia.prl \
 		F:/QT/6.8.1/mingw_64/lib/Qt6Widgets.prl \
 		F:/QT/6.8.1/mingw_64/lib/Qt6Gui.prl \
 		F:/QT/6.8.1/mingw_64/lib/Qt6Sql.prl \
-		F:/QT/6.8.1/mingw_64/lib/Qt6Network.prl \
 		F:/QT/6.8.1/mingw_64/lib/Qt6Core.prl \
 		F:/QT/6.8.1/mingw_64/lib/Qt6EntryPoint.prl \
 		F:/QT/6.8.1/mingw_64/mkspecs/features/build_pass.prf \
@@ -779,12 +776,9 @@ F:/QT/6.8.1/mingw_64/mkspecs/features/exceptions.prf:
 F:/QT/6.8.1/mingw_64/mkspecs/features/yacc.prf:
 F:/QT/6.8.1/mingw_64/mkspecs/features/lex.prf:
 ../../baoshi1.pro:
-F:/QT/6.8.1/mingw_64/lib/Qt6MultimediaWidgets.prl:
-F:/QT/6.8.1/mingw_64/lib/Qt6Multimedia.prl:
 F:/QT/6.8.1/mingw_64/lib/Qt6Widgets.prl:
 F:/QT/6.8.1/mingw_64/lib/Qt6Gui.prl:
 F:/QT/6.8.1/mingw_64/lib/Qt6Sql.prl:
-F:/QT/6.8.1/mingw_64/lib/Qt6Network.prl:
 F:/QT/6.8.1/mingw_64/lib/Qt6Core.prl:
 F:/QT/6.8.1/mingw_64/lib/Qt6EntryPoint.prl:
 F:/QT/6.8.1/mingw_64/mkspecs/features/build_pass.prf:

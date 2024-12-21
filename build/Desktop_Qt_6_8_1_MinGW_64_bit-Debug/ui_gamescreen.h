@@ -31,6 +31,9 @@ public:
     QPushButton *pauseButton;
     QLabel *timeLabel;
     QPushButton *resetButton;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QLabel *skillLabel;
 
     void setupUi(QWidget *GameScreen)
     {
@@ -64,7 +67,16 @@ public:
         timeLabel->setGeometry(QRect(780, 10, 71, 31));
         resetButton = new QPushButton(GameScreen);
         resetButton->setObjectName("resetButton");
-        resetButton->setGeometry(QRect(260, 390, 71, 61));
+        resetButton->setGeometry(QRect(290, 150, 71, 31));
+        pushButton = new QPushButton(GameScreen);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(290, 250, 71, 31));
+        pushButton_2 = new QPushButton(GameScreen);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(290, 350, 71, 31));
+        skillLabel = new QLabel(GameScreen);
+        skillLabel->setObjectName("skillLabel");
+        skillLabel->setGeometry(QRect(170, 420, 191, 91));
 
         retranslateUi(GameScreen);
 
@@ -79,7 +91,10 @@ public:
         scoreLabel->setText(QString());
         pauseButton->setText(QCoreApplication::translate("GameScreen", "\346\232\202\345\201\234", nullptr));
         timeLabel->setText(QString());
-        resetButton->setText(QCoreApplication::translate("GameScreen", "\351\207\215\347\275\256", nullptr));
+        resetButton->setText(QCoreApplication::translate("GameScreen", "\351\207\215\347\275\256\350\215\257\346\260\264", nullptr));
+        pushButton->setText(QCoreApplication::translate("GameScreen", "\345\206\267\345\206\273\350\215\257\346\260\264", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("GameScreen", "\350\266\205\347\272\247\350\215\257\346\260\264", nullptr));
+        skillLabel->setText(QCoreApplication::translate("GameScreen", "TextLabel", nullptr));
     } // retranslateUi
 
 };

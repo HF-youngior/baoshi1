@@ -1,6 +1,5 @@
 QT       += core gui
 QT += sql
-QT += multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,6 +21,7 @@ SOURCES += \
     shopmanager.cpp \
     skillmanager.cpp \
     soundmanager.cpp \
+    startscreen.cpp \
     usermanager.cpp
 
 HEADERS += \
@@ -35,13 +35,15 @@ HEADERS += \
     shopmanager.h \
     skillmanager.h \
     soundmanager.h \
+    startscreen.h \
     usermanager.h
 
 FORMS += \
     gamescreen.ui \
     loginscreen.ui \
     mainwindow.ui \
-    rankinglist.ui
+    rankinglist.ui \
+    startscreen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
